@@ -1,7 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # fail fast
 set -e
 
+if [[ -f "$PGDATA/recovery.conf" ]]; then
+  # database is in recovery mode, so it won't be in service.
+  exit 1
+fi
+
 # check if database is running
-gosu postgres pg_ctl status
+gosu postgres psql -l -t >/dev/null 2>&1
