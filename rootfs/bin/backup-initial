@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-until is_running; do sleep 1; done
+until psql -l -t >/dev/null 2>&1; do sleep 1; done
 
 while true; do
     if [[ ! -f "$PGDATA/recovery.conf" ]] ; then
