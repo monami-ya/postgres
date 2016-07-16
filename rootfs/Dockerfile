@@ -48,6 +48,7 @@ RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364
 	&& pip install --disable-pip-version-check --no-cache-dir git+https://github.com/deis/wal-e.git@380821a6c4ea4f98a244680d7c6c5b04b8c694b3 \
 	&& mkdir -p $WALE_ENVDIR \
 	&& pip install --disable-pip-version-check --no-cache-dir envdir \
+        && pip install --disable-pip-version-check --no-cache-dir --upgrade google-gax \
 	&& apt-get remove -y --auto-remove --purge \
 		gcc \
 		git \
