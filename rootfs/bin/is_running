@@ -4,9 +4,12 @@
 set -e
 
 if [[ -f "$PGDATA/recovery.conf" ]]; then
-  # database is in recovery mode, so it won't be in service.
-  exit 1
-fi
+  # We don't need to call psql for checking in the recovery mode.
+  # As WAL-E calls psql internally.
 
-# check if database is running
-gosu postgres psql -l -t >/dev/null 2>&1
+  # Recovering...not in service.
+  exit 1
+else
+  # check if database is running
+  gosu postgres psql -l -t >/dev/null 2>&1
+fi
